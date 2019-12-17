@@ -1,0 +1,1 @@
+web: gunicorn opencvrestsite.wsgi --log-file -
