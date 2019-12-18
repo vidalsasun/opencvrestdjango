@@ -16,3 +16,4 @@ git push heroku master -f // only if needs
 python manage.py collectstatic
 python manage.py migrate
 python manage.py createsuperuser --email admin@example.com --username admin
+heroku run bash --app opencvrest 

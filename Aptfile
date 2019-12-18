@@ -4,4 +4,6 @@ libfontconfig1
 libice6
 tesseract-ocr
 tesseract-ocr-eng
-libpng12.so.0
+libpng-dev
+libpng12-0
+libpng12-dev
