@@ -7,10 +7,10 @@ heroku create opencvrest
 heroku create opencvrestdj --buildpack https://github.com/freddix/libpng12.git
 
 
-heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
-heroku buildpacks:add --index 2 https://github.com/freddix/libpng12
-heroku buildpacks:remove https://github.com/freddix/libpng12
-heroku buildpacks:add --index 3 https://github.com/matteotiziano/heroku-buildpack-tesseract
+heroku buildpacks:add --index 1 https://github.com/cofacts/heroku-buildpack-tesseract
+heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-apt
+heroku buildpacks:remove xxxxxxxxxxxxxxx
+
 
 heroku login
 heroku git:remote -a opencvrest

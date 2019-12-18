@@ -115,7 +115,7 @@ def detect(base64img):
 
 		# show the output images
 		# return base64.encodestring(roi)
-		return image
+		return "nodata"
 		#cv2.imshow("Image", image)
 		#cv2.imshow("ROI", roi)
 		#cv2.waitKey(0)
