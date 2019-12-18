@@ -29,3 +29,8 @@ heroku run bash
 
 find -iname tessdata # this will give us the path we need
 heroku config:set TESSDATA_PREFIX=./.apt/usr/share/tesseract-ocr/4.00/tessdata
+
+
+en el fichero OCR.py descomentar la siguiente línea si queremos ejecutar la aplicación en local:
+
+        pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"

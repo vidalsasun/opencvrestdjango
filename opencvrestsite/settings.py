@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'e7yhk4=6zt6pcx4(0156)&4akq=_h&7m^z_k)ve(eeyd_skr!s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 ALLOWED_HOSTS = ['opencvrest.herokuapp.com', '127.0.0.1']
 
