@@ -2,7 +2,15 @@
 https://www.codementor.io/@jamesezechukwu/how-to-deploy-django-app-on-heroku-dtsee04d4
 
 heroku create opencvrest
+
+
+heroku create opencvrestdj --buildpack https://github.com/freddix/libpng12.git
+
+
 heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
+heroku buildpacks:add --index 2 https://github.com/freddix/libpng12
+heroku buildpacks:remove https://github.com/freddix/libpng12
+heroku buildpacks:add --index 3 https://github.com/matteotiziano/heroku-buildpack-tesseract
 
 heroku login
 heroku git:remote -a opencvrest
@@ -17,3 +25,7 @@ python manage.py collectstatic
 python manage.py migrate
 python manage.py createsuperuser --email admin@example.com --username admin
 heroku run bash --app opencvrest 
+heroku run bash
+
+find -iname tessdata # this will give us the path we need
+heroku config:set TESSDATA_PREFIX=./.apt/usr/share/tesseract-ocr/4.00/tessdata
