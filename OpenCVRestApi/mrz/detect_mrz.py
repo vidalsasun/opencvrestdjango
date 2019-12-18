@@ -107,8 +107,8 @@ def detect(base64img):
 
 				#text_detection.text_detection(roi, w, h)
 				#text_detection.text_detection(roi, 320, 320)
-				cv2.imwrite('roi.png',roi)
-				mrz = read_mrz('roi.png')				
+				cv2.imwrite('roi.jpg',roi)
+				mrz = read_mrz('roi.jpg')				
 				#plot_bytes_encode = str(base64.b64encode(roi).decode('utf8'))
 				#stringpic = "data:image/png;base64," + plot_bytes_encode	
 				return mrz	
