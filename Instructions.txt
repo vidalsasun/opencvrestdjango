@@ -1,4 +1,18 @@
 -- HEROKU
 https://www.codementor.io/@jamesezechukwu/how-to-deploy-django-app-on-heroku-dtsee04d4
 
+heroku create opencvrest
+heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
 
+heroku login
+heroku git:remote -a opencvrest
+git init
+git add .
+git commit -m "comments"
+git push heroku master
+git push heroku master -f // only if needs
+
+
+python manage.py collectstatic
+python manage.py migrate
+python manage.py createsuperuser --email admin@example.com --username admin
