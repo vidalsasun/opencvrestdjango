@@ -12,4 +12,3 @@ dj_database_url==0.5.0
 Django==3.0.6
 passporteye==1.4.1
 Pillow==7.1.2
-skimage==0.0
