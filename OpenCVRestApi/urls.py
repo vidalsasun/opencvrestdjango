@@ -7,6 +7,7 @@ from .views import ImageCVSet
 
 router = routers.DefaultRouter()
 router.register(r'imagesCV', views.ImageCVSet)
+router.register(r'imagesCVTorch', views.ImageCVPyTorchSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

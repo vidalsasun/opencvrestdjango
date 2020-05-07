@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ImageCVSerializer
 from .mrz import detect_mrz
+from .mrz_pytorch import translate
 from .models import ImageCV
 from rest_framework import viewsets
 import io
@@ -39,4 +40,18 @@ class ImageCVSet(viewsets.ModelViewSet):
         base64ret = detect_mrz.detect(serializer.data["base64"])       
         jsonData = json.dumps(base64ret,default=convert_to_dict,indent=4, sort_keys=True)
         return Response(jsonData)
+class ImageCVPyTorchSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    queryset = ImageCV.objects.all().order_by('name')
+    serializer_class = ImageCVSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = ImageCVSerializer(data=request.data)
+        serializer.is_valid()
+        # True
+        serializer.validated_data                
+        base64ret = translate.translate(serializer.data["base64"])       
+        jsonData = json.dumps(base64ret,default=convert_to_dict,indent=4, sort_keys=True)
+        return Response(jsonData)
+    
     

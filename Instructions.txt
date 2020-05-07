@@ -3,6 +3,16 @@ https://www.codementor.io/@jamesezechukwu/how-to-deploy-django-app-on-heroku-dts
 
 heroku create opencvrest
 
+// LIMPIAR CACHE HEROKU
+heroku plugins:install heroku-repo
+heroku repo:gc --app opencvrest
+heroku repo:purge_cache --app opencvrest
+
+// GENERAR REQUIREMENTS.TXT AUTOMATICAMENTE
+pip install pipreqs
+cd ..
+pipreqs opencvrest
+//////
 
 heroku create opencvrestdj --buildpack https://github.com/freddix/libpng12.git
 
