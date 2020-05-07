@@ -1,5 +1,5 @@
 class PyTorchtranslateParams:
-    trained_model = '/weights/craft_mlt_25k.pth'
+    trained_model = 'weights/craft_mlt_25k.pth'
     text_threshold = 0.7
     low_text = 0.4
     link_threshold = 0.4
