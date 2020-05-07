@@ -25,7 +25,7 @@ SECRET_KEY = 'e7yhk4=6zt6pcx4(0156)&4akq=_h&7m^z_k)ve(eeyd_skr!s'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['opencvrest.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mrz-detection.herokuapp.com', '127.0.0.1']
 
 
 
