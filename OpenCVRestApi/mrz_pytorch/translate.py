@@ -115,6 +115,7 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
+    puts "init!"
     # load net
     net = CRAFT()     # initialize
     modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
