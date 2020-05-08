@@ -85,17 +85,10 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
 
     # forward pass
     with torch.no_grad():
-        logger.error('c01')
         y, feature = net(x)
-        logger.error('c11')
-
-    logger.error('c1')
 
     # make score and link map
     score_text = y[0,:,:,0].cpu().data.numpy()
-
-    logger.error('c2')
-
     score_link = y[0,:,:,1].cpu().data.numpy()
 
     logger.error('d')

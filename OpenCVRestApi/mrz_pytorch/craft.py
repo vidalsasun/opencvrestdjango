@@ -33,24 +33,14 @@ class double_conv(nn.Module):
 class CRAFT(nn.Module):
     def __init__(self, pretrained=False, freeze=False):
         
-        logger.error('aaa')
-
         super(CRAFT, self).__init__()
-
-        logger.error('bbb')
-
         """ Base network """
         self.basenet = vgg16_bn(pretrained, freeze)
-
-        logger.error('ccc')
-
         """ U network """
         self.upconv1 = double_conv(1024, 512, 256)
         self.upconv2 = double_conv(512, 256, 128)
         self.upconv3 = double_conv(256, 128, 64)
         self.upconv4 = double_conv(128, 64, 32)
-
-        logger.error('ddd')
 
         num_class = 2
         self.conv_cls = nn.Sequential(
@@ -61,38 +51,48 @@ class CRAFT(nn.Module):
             nn.Conv2d(16, num_class, kernel_size=1),
         )
 
-        logger.error('eee')
-
         init_weights(self.upconv1.modules())
         init_weights(self.upconv2.modules())
         init_weights(self.upconv3.modules())
         init_weights(self.upconv4.modules())
         init_weights(self.conv_cls.modules())
-
-        logger.error('fff')
-
         
     def forward(self, x):
         """ Base network """
+        
+        logger.error('aaaa')
+
         sources = self.basenet(x)
+
+        logger.error('bbbb')
 
         """ U network """
         y = torch.cat([sources[0], sources[1]], dim=1)
         y = self.upconv1(y)
 
+        logger.error('cccc')
+
         y = F.interpolate(y, size=sources[2].size()[2:], mode='bilinear', align_corners=False)
         y = torch.cat([y, sources[2]], dim=1)
         y = self.upconv2(y)
+
+        logger.error('dddd')
 
         y = F.interpolate(y, size=sources[3].size()[2:], mode='bilinear', align_corners=False)
         y = torch.cat([y, sources[3]], dim=1)
         y = self.upconv3(y)
 
+        logger.error('eeee')
+
         y = F.interpolate(y, size=sources[4].size()[2:], mode='bilinear', align_corners=False)
         y = torch.cat([y, sources[4]], dim=1)
         feature = self.upconv4(y)
 
+        logger.error('ffff')
+
         y = self.conv_cls(feature)
+
+        logger.error('gggg')
 
         return y.permute(0,2,3,1), feature
 
