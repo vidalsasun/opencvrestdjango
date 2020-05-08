@@ -85,7 +85,9 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
 
     # forward pass
     with torch.no_grad():
+        logger.error('c01')
         y, feature = net(x)
+        logger.error('c11')
 
     logger.error('c1')
 
