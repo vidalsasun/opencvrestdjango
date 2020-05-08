@@ -37,6 +37,10 @@ import imutils
 from OpenCVRestApi.mrz_pytorch.craft import CRAFT
 from collections import OrderedDict
 
+import logging
+logger = logging.getLogger('django.server')
+
+
 def copyStateDict(state_dict):
     if list(state_dict.keys())[0].startswith("module"):
         start_idx = 1
@@ -115,7 +119,7 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
-    puts "init!"
+    logger.error('Init!')
     # load net
     net = CRAFT()     # initialize
     modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
