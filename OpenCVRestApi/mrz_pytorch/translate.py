@@ -122,15 +122,15 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
     t1 = time.time() - t1
 
     # render results (optional)
-    render_img = score_text.copy()
-    render_img = np.hstack((render_img, score_link))
-    ret_score_text =  OpenCVRestApi.mrz_pytorch.imgproc.cvt2HeatmapImg(render_img)
+    #render_img = score_text.copy()
+    #render_img = np.hstack((render_img, score_link))
+    #ret_score_text = OpenCVRestApi.mrz_pytorch.imgproc.cvt2HeatmapImg(render_img)
 
     logger.error('i')
 
     #if args.show_time : print("\ninfer/postproc time : {:.3f}/{:.3f}".format(t0, t1))
 
-    return boxes, polys, ret_score_text
+    return boxes, polys
 
 def readb64(uri):
    encoded_data = uri.split(',')[1]
@@ -192,7 +192,7 @@ def translate(base64img):
 
     logger.error('11')
 
-    bboxes, polys, score_text = load_net(net, image, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.text_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.link_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.low_text, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.poly, refine_net)
+    bboxes, polys = load_net(net, image, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.text_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.link_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.low_text, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.poly, refine_net)
     results = {}
     v = 0
 
