@@ -121,17 +121,19 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
-    logger.error('1')
+    logger.error('1.a')
     # load net
     net = CRAFT()     # initialize
     logger.error('2')
 
+    logger.error('3, STATIC_ROOT: ')
+    logger.error(STATIC_ROOT)
+    logger.error('---------')
+
+
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     modelfile = STATIC_ROOT + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     
-    logger.error('3, modelfile: ')
-    logger.error(modelfile)
-    logger.error('---------')
 
 
     #print('Loading weights from checkpoint (' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model + ')')
