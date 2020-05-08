@@ -123,8 +123,16 @@ def translate(base64img):
     # load net
     net = CRAFT()     # initialize
     logger.error('2')
-    modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
-    logger.error('3')
+
+    #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    modelfile = BASE_DIR + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    
+    logger.error('3, modelfile: ')
+    logger.error(modelfile)
+    logger.error('---------')
+
+
     #print('Loading weights from checkpoint (' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model + ')')
     if OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda:
         net.load_state_dict(copyStateDict(torch.load(modelfile)))
