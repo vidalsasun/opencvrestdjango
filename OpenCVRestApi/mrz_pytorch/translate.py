@@ -63,11 +63,16 @@ if not os.path.isdir(result_folder):
 """
 
 def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, refine_net=None):
+
+    logger.error('a')
+
     t0 = time.time()
 
     # resize
     img_resized, target_ratio, size_heatmap =  OpenCVRestApi.mrz_pytorch.imgproc.resize_aspect_ratio(image,OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.canvas_size, interpolation=cv2.INTER_LINEAR, mag_ratio=OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.mag_ratio)
     ratio_h = ratio_w = 1 / target_ratio
+
+    logger.error('b')
 
     # preprocessing
     x =  OpenCVRestApi.mrz_pytorch.imgproc.normalizeMeanVariance(img_resized)
@@ -75,6 +80,8 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
     x = Variable(x.unsqueeze(0))                # [c, h, w] to [b, c, h, w]
     if cuda:
         x = x.cuda()
+
+    logger.error('c')
 
     # forward pass
     with torch.no_grad():
@@ -84,23 +91,33 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
     score_text = y[0,:,:,0].cpu().data.numpy()
     score_link = y[0,:,:,1].cpu().data.numpy()
 
+    logger.error('d')
+
     # refine link
     if refine_net is not None:
         with torch.no_grad():
             y_refiner = refine_net(y, feature)
         score_link = y_refiner[0,:,:,0].cpu().data.numpy()
 
+    logger.error('e')
+
     t0 = time.time() - t0
     t1 = time.time()
 
+    logger.error('f')
+
     # Post-processing
     boxes, polys = OpenCVRestApi.mrz_pytorch.craft_utils.getDetBoxes(score_text, score_link, text_threshold, link_threshold, low_text, poly)
+
+    logger.error('g')
 
     # coordinate adjustment
     boxes = OpenCVRestApi.mrz_pytorch.craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
     polys = OpenCVRestApi.mrz_pytorch.craft_utils.adjustResultCoordinates(polys, ratio_w, ratio_h)
     for k in range(len(polys)):
         if polys[k] is None: polys[k] = boxes[k]
+    
+    logger.error('h')
 
     t1 = time.time() - t1
 
@@ -108,6 +125,8 @@ def load_net(net, image, text_threshold, link_threshold, low_text, cuda, poly, r
     render_img = score_text.copy()
     render_img = np.hstack((render_img, score_link))
     ret_score_text =  OpenCVRestApi.mrz_pytorch.imgproc.cvt2HeatmapImg(render_img)
+
+    logger.error('i')
 
     #if args.show_time : print("\ninfer/postproc time : {:.3f}/{:.3f}".format(t0, t1))
 
@@ -121,10 +140,8 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
-    logger.error('1.a')
     # load net
     net = CRAFT()     # initialize
-    logger.error('2')
 
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     modelfile = PROJECT_ROOT + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
@@ -134,18 +151,13 @@ def translate(base64img):
         net.load_state_dict(copyStateDict(torch.load(modelfile)))
     else:
         net.load_state_dict(copyStateDict(torch.load(modelfile, map_location='cpu')))
-    logger.error('4')
 
     if OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda:
         net = net.cuda()
         net = torch.nn.DataParallel(net)
         cudnn.benchmark = False
 
-    logger.error('5')
-
     net.eval()
-
-    logger.error('6')
 
     # LinkRefiner
     refine_net = None
@@ -165,24 +177,16 @@ def translate(base64img):
 
     t = time.time()
     
-    logger.error('7')
-
     # load data
     crnn=CRNNReader()
-
-    logger.error('8')
 
     #print("Test image {:d}/{:d}: {:s}".format(k+1, len(image_list), image_path), end='\r')
     #image = imgproc.loadImage(image_path)
     image = readb64(base64img)   
 
-    logger.error('9')
-
     angle = OpenCVRestApi.mrz_pytorch.document_orientation_preprocessing.detect_angle(image)
     #print(angle)
     
-    logger.error('10')
-
     if angle > 0:
         image = imutils.rotate_bound(image, angle)
 
