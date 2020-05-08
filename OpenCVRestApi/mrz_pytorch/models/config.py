@@ -11,3 +11,4 @@ class PyTorchtranslateParams:
     test_folder = '/data/'
     refine = False
     refiner_model = 'craft_refiner_CTW1500.pth'
+    crnn_model = 'crnn.pth'

@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
-import logging
-logger = logging.getLogger('django.server')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -122,14 +120,6 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static",) 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-
-logger.error('0, static dir:')
-logger.error(os.path.join(BASE_DIR, 'static'))
-logger.error('---------')
-
-logger.error('0.1, PROJECT_ROOT:')
-logger.error(PROJECT_ROOT)
-logger.error('---------')
 
 # Extra lookup directories for collectstatic to find static files
 #  Add configuration for static files storage using whitenoise

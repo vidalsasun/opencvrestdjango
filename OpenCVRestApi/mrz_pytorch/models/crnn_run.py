@@ -2,14 +2,17 @@ import os
 from PIL import Image
 from skimage import io
 import OpenCVRestApi.mrz_pytorch.models.crnn as crnn
-
+import OpenCVRestApi.mrz_pytorch.models.config as config
 import torch
 from torch.autograd import Variable
 import OpenCVRestApi.mrz_pytorch.models.utils  as utils
 import OpenCVRestApi.mrz_pytorch.models.preprocess as preprocess
 
+from opencvrestsite.settings import PROJECT_ROOT
+
+
 class CRNNReader():
-    def __init__(self, model_path= os.path.dirname(__file__) + '/pretrain/crnn.pth'):
+    def __init__(self, model_path= PROJECT_ROOT + '/' + config.PyTorchtranslateParams.crnn_model):
         self.model_path = model_path
         self.model = crnn.CRNN(32, 1,37, 256)
         self.model = self.model.float()

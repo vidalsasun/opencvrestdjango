@@ -126,19 +126,9 @@ def translate(base64img):
     net = CRAFT()     # initialize
     logger.error('2')
 
-    logger.error('3, PROJECT_ROOT: ')
-    logger.error(PROJECT_ROOT)
-    logger.error('---------')
-
-
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     modelfile = PROJECT_ROOT + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     
-    logger.error('3.1, modelfile: ')
-    logger.error(modelfile)
-    logger.error('---------')
-
-
     #print('Loading weights from checkpoint (' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model + ')')
     if OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda:
         net.load_state_dict(copyStateDict(torch.load(modelfile)))
