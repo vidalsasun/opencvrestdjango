@@ -119,22 +119,29 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
-    logger.error('Init!')
+    logger.error('1')
     # load net
     net = CRAFT()     # initialize
+    logger.error('2')
     modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    logger.error('3')
     #print('Loading weights from checkpoint (' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model + ')')
     if OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda:
         net.load_state_dict(copyStateDict(torch.load(modelfile)))
     else:
         net.load_state_dict(copyStateDict(torch.load(modelfile, map_location='cpu')))
+    logger.error('4')
 
     if OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda:
         net = net.cuda()
         net = torch.nn.DataParallel(net)
         cudnn.benchmark = False
 
+    logger.error('5')
+
     net.eval()
+
+    logger.error('6')
 
     # LinkRefiner
     refine_net = None
@@ -153,21 +160,36 @@ def translate(base64img):
         OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.poly = True
 
     t = time.time()
+    
+    logger.error('7')
 
     # load data
     crnn=CRNNReader()
-    
+
+    logger.error('8')
+
     #print("Test image {:d}/{:d}: {:s}".format(k+1, len(image_list), image_path), end='\r')
     #image = imgproc.loadImage(image_path)
     image = readb64(base64img)   
+
+    logger.error('9')
+
     angle = OpenCVRestApi.mrz_pytorch.document_orientation_preprocessing.detect_angle(image)
     #print(angle)
+    
+    logger.error('10')
+
     if angle > 0:
         image = imutils.rotate_bound(image, angle)
+
+    logger.error('11')
 
     bboxes, polys, score_text = load_net(net, image, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.text_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.link_threshold, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.low_text, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.cuda, OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.poly, refine_net)
     results = {}
     v = 0
+
+    logger.error('12')
+
     #traduction_words = []
     traduction_words={}    
     for _, tmp_box in enumerate(bboxes):
@@ -192,6 +214,7 @@ def translate(base64img):
                 #bbox_file = result_folder + "bbox/" + str(v) + '.jpg'
                 #cv2.imwrite(bbox_file, image[y:y+h, x:x+w])
 
+    logger.error('13')
 
     return traduction_words
     # save score text
