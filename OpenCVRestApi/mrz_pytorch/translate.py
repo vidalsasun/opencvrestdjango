@@ -119,9 +119,7 @@ def readb64(uri):
 
 #if __name__ == '__main__':
 def translate(base64img):
-    logger.error('1, static dir:')
-    logger.error(os.path.join(BASE_DIR, 'static'))
-    logger.error('---------')
+    logger.error('1')
     # load net
     net = CRAFT()     # initialize
     logger.error('2')

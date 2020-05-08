@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
+import logging
+logger = logging.getLogger('django.server')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -116,6 +118,10 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+logger.error('1, static dir:')
+logger.error(os.path.join(STATICFILES_DIRS, 'static'))
+logger.error('---------')
 
 
 STATIC_URL = '/static/'
