@@ -120,7 +120,7 @@ STATICFILES_DIRS = (
 )
 
 logger.error('1, static dir:')
-logger.error(os.path.join(STATICFILES_DIRS, 'static'))
+logger.error(os.path.join(BASE_DIR, 'static'))
 logger.error('---------')
 
 
