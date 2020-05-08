@@ -126,7 +126,7 @@ def translate(base64img):
 
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    modelfile = BASE_DIR + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    modelfile = os.path.join(BASE_DIR, 'static') + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     
     logger.error('3, modelfile: ')
     logger.error(modelfile)
