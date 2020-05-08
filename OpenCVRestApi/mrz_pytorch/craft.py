@@ -10,6 +10,9 @@ import torch.nn.functional as F
 
 from OpenCVRestApi.mrz_pytorch.basenet.vgg16_bn import vgg16_bn, init_weights
 
+import logging
+logger = logging.getLogger('django.server')
+
 class double_conv(nn.Module):
     def __init__(self, in_ch, mid_ch, out_ch):
         super(double_conv, self).__init__()
@@ -29,16 +32,25 @@ class double_conv(nn.Module):
 
 class CRAFT(nn.Module):
     def __init__(self, pretrained=False, freeze=False):
+        
+        logger.error('aaa')
+
         super(CRAFT, self).__init__()
+
+        logger.error('bbb')
 
         """ Base network """
         self.basenet = vgg16_bn(pretrained, freeze)
+
+        logger.error('ccc')
 
         """ U network """
         self.upconv1 = double_conv(1024, 512, 256)
         self.upconv2 = double_conv(512, 256, 128)
         self.upconv3 = double_conv(256, 128, 64)
         self.upconv4 = double_conv(128, 64, 32)
+
+        logger.error('ddd')
 
         num_class = 2
         self.conv_cls = nn.Sequential(
@@ -49,11 +61,16 @@ class CRAFT(nn.Module):
             nn.Conv2d(16, num_class, kernel_size=1),
         )
 
+        logger.error('eee')
+
         init_weights(self.upconv1.modules())
         init_weights(self.upconv2.modules())
         init_weights(self.upconv3.modules())
         init_weights(self.upconv4.modules())
         init_weights(self.conv_cls.modules())
+
+        logger.error('fff')
+
         
     def forward(self, x):
         """ Base network """
