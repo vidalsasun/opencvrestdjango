@@ -1,5 +1,5 @@
 class PyTorchtranslateParams:
-    trained_model = 'weights/craft_mlt_25k.pth'
+    trained_model = 'craft_mlt_25k.pth'
     text_threshold = 0.7
     low_text = 0.4
     link_threshold = 0.4
@@ -10,4 +10,4 @@ class PyTorchtranslateParams:
     show_time = False
     test_folder = '/data/'
     refine = False
-    refiner_model = 'weights/craft_refiner_CTW1500.pth'
+    refiner_model = 'craft_refiner_CTW1500.pth'

@@ -7,6 +7,8 @@ from collections import defaultdict
 import pytesseract
 from pytesseract import Output
 
+from opencvrestsite.settings import STATIC_ROOT
+
 import OpenCVRestApi.mrz_pytorch.models.config
 
 import OpenCVRestApi.mrz_pytorch.document_orientation_preprocessing
@@ -125,8 +127,7 @@ def translate(base64img):
     logger.error('2')
 
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    modelfile = os.path.join(BASE_DIR, 'static') + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    modelfile = STATIC_ROOT + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     
     logger.error('3, modelfile: ')
     logger.error(modelfile)
