@@ -7,7 +7,7 @@ from collections import defaultdict
 import pytesseract
 from pytesseract import Output
 
-from opencvrestsite.settings import STATIC_ROOT
+from opencvrestsite.settings import PROJECT_ROOT
 
 import OpenCVRestApi.mrz_pytorch.models.config
 
@@ -126,14 +126,17 @@ def translate(base64img):
     net = CRAFT()     # initialize
     logger.error('2')
 
-    logger.error('3, STATIC_ROOT: ')
-    logger.error(STATIC_ROOT)
+    logger.error('3, PROJECT_ROOT: ')
+    logger.error(PROJECT_ROOT)
     logger.error('---------')
 
 
     #modelfile = os.path.dirname(__file__) + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
-    modelfile = STATIC_ROOT + '/computevision/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
+    modelfile = PROJECT_ROOT + '/' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model
     
+    logger.error('3.1, modelfile: ')
+    logger.error(modelfile)
+    logger.error('---------')
 
 
     #print('Loading weights from checkpoint (' + OpenCVRestApi.mrz_pytorch.models.config.PyTorchtranslateParams.trained_model + ')')
