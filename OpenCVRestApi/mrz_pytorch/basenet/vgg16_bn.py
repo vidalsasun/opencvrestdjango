@@ -88,16 +88,29 @@ class vgg16_bn(torch.nn.Module):
         logger.error('1010101010')
 
     def forward(self, X):
+        logger.error('f1')
         h = self.slice1(X)
+        logger.error('f2')
         h_relu2_2 = h
+        logger.error('f3')
         h = self.slice2(h)
+        logger.error('f4')
         h_relu3_2 = h
+        logger.error('f5')
         h = self.slice3(h)
+        logger.error('f6')
         h_relu4_3 = h
+        logger.error('1010101010')
         h = self.slice4(h)
+        logger.error('f7')
         h_relu5_3 = h
+        logger.error('f8')
         h = self.slice5(h)
+        logger.error('f9')
         h_fc7 = h
+        logger.error('f10')
         vgg_outputs = namedtuple("VggOutputs", ['fc7', 'relu5_3', 'relu4_3', 'relu3_2', 'relu2_2'])
+        logger.error('f11')
         out = vgg_outputs(h_fc7, h_relu5_3, h_relu4_3, h_relu3_2, h_relu2_2)
+        logger.error('f12')
         return out
