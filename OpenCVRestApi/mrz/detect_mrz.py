@@ -10,6 +10,7 @@ import cv2
 import base64
 import io
 from passporteye import read_mrz
+import OpenCVRestApi.mrz.document_orientation_preprocessing
 
 #from . import text_detection
 
@@ -38,6 +39,13 @@ def detect(base64img):
 		#image = cv2.imread(img)
 
 		image = imutils.resize(image, height=600)
+
+		angle = OpenCVRestApi.mrz.document_orientation_preprocessing.detect_angle(image)
+    	#print(angle)
+    
+    	if angle > 0:
+        	image = imutils.rotate_bound(image, angle)
+
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 		# smooth the image using a 3x3 Gaussian, then apply the blackhat
