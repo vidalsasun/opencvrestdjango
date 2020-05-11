@@ -6,6 +6,9 @@ import torch.nn.init as init
 from torchvision import models
 from torchvision.models.vgg import model_urls
 
+import logging
+logger = logging.getLogger('django.server')
+
 def init_weights(modules):
     for m in modules:
         if isinstance(m, nn.Conv2d):
@@ -21,14 +24,29 @@ def init_weights(modules):
 
 class vgg16_bn(torch.nn.Module):
     def __init__(self, pretrained=True, freeze=True):
+
+        logger.error('11111')
+
         super(vgg16_bn, self).__init__()
+
+        logger.error('22222')
+
         model_urls['vgg16_bn'] = model_urls['vgg16_bn'].replace('https://', 'http://')
+        
+        logger.error('33333')
+
         vgg_pretrained_features = models.vgg16_bn(pretrained=pretrained).features
+
+        logger.error('44444')
+
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()
         self.slice3 = torch.nn.Sequential()
         self.slice4 = torch.nn.Sequential()
         self.slice5 = torch.nn.Sequential()
+        
+        logger.error('55555')
+
         for x in range(12):         # conv2_2
             self.slice1.add_module(str(x), vgg_pretrained_features[x])
         for x in range(12, 19):         # conv3_3
@@ -38,6 +56,8 @@ class vgg16_bn(torch.nn.Module):
         for x in range(29, 39):         # conv5_3
             self.slice4.add_module(str(x), vgg_pretrained_features[x])
 
+        logger.error('66666')
+
         # fc6, fc7 without atrous conv
         self.slice5 = torch.nn.Sequential(
                 nn.MaxPool2d(kernel_size=3, stride=1, padding=1),
@@ -45,11 +65,16 @@ class vgg16_bn(torch.nn.Module):
                 nn.Conv2d(1024, 1024, kernel_size=1)
         )
 
+        logger.error('77777')
+
         if not pretrained:
             init_weights(self.slice1.modules())
             init_weights(self.slice2.modules())
             init_weights(self.slice3.modules())
             init_weights(self.slice4.modules())
+
+        
+        logger.error('88888')
 
         init_weights(self.slice5.modules())        # no pretrained model for fc6 and fc7
 

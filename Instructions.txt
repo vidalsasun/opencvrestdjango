@@ -8,6 +8,10 @@ heroku plugins:install heroku-repo
 heroku repo:gc --app opencvrest
 heroku repo:purge_cache --app opencvrest
 
+
+// LOGS
+heroku logs --tail
+
 // GENERAR REQUIREMENTS.TXT AUTOMATICAMENTE
 pip install pipreqs
 cd ..
