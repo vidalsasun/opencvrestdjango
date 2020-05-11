@@ -43,8 +43,8 @@ def detect(base64img):
 		angle = OpenCVRestApi.mrz.document_orientation_preprocessing.detect_angle(image)
     	#print(angle)
     
-    	if angle > 0:
-        	image = imutils.rotate_bound(image, angle)
+		if angle > 0:
+			image = imutils.rotate_bound(image, angle)
 
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
