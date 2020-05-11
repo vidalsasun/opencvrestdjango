@@ -31,7 +31,8 @@ class vgg16_bn(torch.nn.Module):
 
         logger.error('22222')
 
-        model_urls['vgg16_bn'] = model_urls['vgg16_bn'].replace('https://', 'http://')
+        #model_urls['vgg16_bn'] = model_urls['vgg16_bn'].replace('https://', 'http://')
+        model_urls['vgg16_bn'] = model_urls['vgg16_bn']
         
         logger.error('33333')
 
