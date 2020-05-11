@@ -1,1 +1,1 @@
-web: gunicorn opencvrestsite.wsgi --timeout=1200 --log-level=debug --log-file -
+web: gunicorn opencvrestsite.wsgi --timeout=3600 --log-level=debug --log-file -
