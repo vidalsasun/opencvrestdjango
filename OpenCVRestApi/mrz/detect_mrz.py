@@ -11,6 +11,8 @@ import base64
 import io
 from passporteye import read_mrz
 import OpenCVRestApi.mrz.document_orientation_preprocessing
+import pytesseract
+from pytesseract import Output
 
 #from . import text_detection
 
@@ -112,14 +114,20 @@ def detect(base64img):
 				#cv2.imshow("ROI", roi)
 				#cv2.waitKey(0)
 				#return base64.b64encode(roi).decode('utf-8')
-
 				#text_detection.text_detection(roi, w, h)
 				#text_detection.text_detection(roi, 320, 320)
-				cv2.imwrite('roi.jpg',roi)
-				mrz = read_mrz('roi.jpg')				
-				#plot_bytes_encode = str(base64.b64encode(roi).decode('utf8'))
-				#stringpic = "data:image/png;base64," + plot_bytes_encode	
-				return mrz	
+				cv2.imwrite('roi.jpg',roi)			
+                #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
+
+				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
+				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
+				return translate
+                #traduction_words.append(translate)
+                #traduction_words[v]=translate
+				#mrz = read_mrz('roi.jpg')	
+				##plot_bytes_encode = str(base64.b64encode(roi).decode('utf8'))
+				##stringpic = "data:image/png;base64," + plot_bytes_encode	
+				#return mrz	
 
 		# show the output images
 		# return base64.encodestring(roi)

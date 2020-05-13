@@ -8,9 +8,14 @@ heroku plugins:install heroku-repo
 heroku repo:gc --app opencvrest
 heroku repo:purge_cache --app opencvrest
 
+// HEROKU bash
+heroku run bash
 
 // LOGS
 heroku logs --tail
+
+// SUBIR FICHERO AL SERVIDOR HEROKU
+wget https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz
 
 // GENERAR REQUIREMENTS.TXT AUTOMATICAMENTE
 pip install pipreqs
