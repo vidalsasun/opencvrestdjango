@@ -118,7 +118,7 @@ def detect(base64img):
 				#text_detection.text_detection(roi, 320, 320)
 				cv2.imwrite('roi.jpg',roi)			
                 #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
-
+				pytesseract.pytesseract.tesseract_cmd = './tessdata'
 				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
 				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
 				return translate
