@@ -199,9 +199,11 @@ if __name__ == '__main__':
                     results['{}'.format(_)] = crnn.get_predictions(tmp_img)
                     v = v + 1
                     bbox_file = result_folder + "bbox/" + str(v) + '.jpg'
-                    pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
-                    custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789< --psm 6'
-                    translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
+                    
+                    #pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
+                    #custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789< --psm 6'
+                    #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
+                    
                     #cv2.imshow("Rotated (Correct)", image[y:y+h, x:x+w])
                     #cv2.waitKey(0)
                     cv2.imwrite(bbox_file, image[y:y+h, x:x+w])
