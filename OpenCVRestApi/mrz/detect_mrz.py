@@ -13,6 +13,9 @@ from passporteye import read_mrz
 import OpenCVRestApi.mrz.document_orientation_preprocessing
 import pytesseract
 from pytesseract import Output
+from opencvrestsite.settings import PROJECT_ROOT
+import logging
+logger = logging.getLogger('django.server')
 
 #from . import text_detection
 
@@ -118,7 +121,11 @@ def detect(base64img):
 				#text_detection.text_detection(roi, 320, 320)
 				cv2.imwrite('roi.jpg',roi)			
                 #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
-				pytesseract.pytesseract.tesseract_cmd = './tessdata'
+				logger.error('-------------------')
+				logger.error('tessdata folder:')
+				logger.error(PROJECT_ROOT + '/tessdata')
+				logger.error('-------------------')
+				pytesseract.pytesseract.tesseract_cmd = PROJECT_ROOT + '/tessdata'  
 				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
 				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
 				return translate

@@ -57,3 +57,5 @@ pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe
 Una vez que este todo ok, quitar DEBUG=True del fichero settings
 
 
+heroku config:set TESSDATA_PREFIX=./tessdata
+
