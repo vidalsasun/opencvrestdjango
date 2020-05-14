@@ -121,15 +121,17 @@ def detect(base64img):
 				#text_detection.text_detection(roi, 320, 320)
 				cv2.imwrite('roi.jpg',roi)			
                 #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
-				logger.error('-------------------')
+				
+				"""logger.error('-------------------')
 				logger.error('tessdata folder:')
-				logger.error(PROJECT_ROOT + '/tessdata/')
+				logger.error(PROJECT_ROOT)
 				logger.error('-------------------')
-				pytesseract.pytesseract.tesseract_cmd = PROJECT_ROOT + '/tessdata/'  
+				pytesseract.pytesseract.tesseract_cmd = PROJECT_ROOT  
 				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
 				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
-				return translate
-                #traduction_words.append(translate)
+				return translate"""
+                
+				#traduction_words.append(translate)
                 #traduction_words[v]=translate
 				#mrz = read_mrz('roi.jpg')	
 				##plot_bytes_encode = str(base64.b64encode(roi).decode('utf8'))
