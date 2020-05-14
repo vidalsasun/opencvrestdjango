@@ -126,7 +126,7 @@ def detect(base64img):
 				logger.error('tessdata folder:')
 				logger.error(PROJECT_ROOT)
 				logger.error('-------------------')
-				#pytesseract.pytesseract.tesseract_cmd = PROJECT_ROOT  
+				pytesseract.pytesseract.tesseract_cmd = './.apt/usr/share/tessdata/'
 				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
 				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
 				return translate
