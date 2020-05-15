@@ -129,7 +129,7 @@ def detect(base64img):
 
 				#pytesseract.pytesseract.tesseract_cmd = './.apt/usr/share/tessdata'
 				custom_config = r'-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890< --psm 6'
-				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='deu', config=custom_config)
+				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='spa', config=custom_config)
 				return translate
                 
 				#traduction_words.append(translate)
