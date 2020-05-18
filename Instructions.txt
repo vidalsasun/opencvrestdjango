@@ -16,6 +16,10 @@ heroku logs --tail
 
 // SUBIR FICHERO AL SERVIDOR HEROKU
 wget https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz
+curl https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz
+
+curl https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz > OCRB.traineddata
+
 
 // DESCOMPRIMIR ZIP
 gunzip OCRB.traineddata.gz
@@ -32,6 +36,8 @@ heroku create opencvrestdj --buildpack https://github.com/freddix/libpng12.git
 
 
 heroku buildpacks:add --index 1 https://github.com/cofacts/heroku-buildpack-tesseract
+heroku buildpacks:add --index 1 https://github.com/vidalsasun/heroku-buildpack-tesseract
+
 heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-apt
 heroku buildpacks:remove xxxxxxxxxxxxxxx
 
@@ -64,3 +70,4 @@ Una vez que este todo ok, quitar DEBUG=True del fichero settings
 
 heroku config:set TESSDATA_PREFIX=./app/tessdata
 
+heroku config:set TESSERACT_OCR_LANGUAGES="spa"
