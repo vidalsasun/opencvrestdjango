@@ -5,8 +5,8 @@ heroku create opencvrest
 
 // LIMPIAR CACHE HEROKU
 heroku plugins:install heroku-repo
-heroku repo:gc --app opencvrest
-heroku repo:purge_cache --app opencvrest
+heroku repo:gc --app mrz-detection
+heroku repo:purge_cache --app mrz-detection
 
 // HEROKU bash
 heroku run bash
@@ -19,6 +19,10 @@ wget https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.trainedda
 curl https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz
 
 curl https://github.com/DaanVanVugt/tesseract-mrz/raw/master/lang/OCRB.traineddata.gz > OCRB.traineddata
+
+
+// LS con tamaño de ficheros
+ls -lha
 
 
 // DESCOMPRIMIR ZIP
@@ -40,6 +44,7 @@ heroku buildpacks:add --index 1 https://github.com/vidalsasun/heroku-buildpack-t
 
 heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-apt
 heroku buildpacks:remove xxxxxxxxxxxxxxx
+
 
 
 heroku login
@@ -70,4 +75,7 @@ Una vez que este todo ok, quitar DEBUG=True del fichero settings
 
 heroku config:set TESSDATA_PREFIX=./app/tessdata
 
-heroku config:set TESSERACT_OCR_LANGUAGES="spa"
+
+heroku config:set TESSDATA_PREFIX=./vendor/tessdata
+
+heroku config:set TESSERACT_OCR_LANGUAGES="OCRB"
