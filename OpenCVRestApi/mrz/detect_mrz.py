@@ -122,6 +122,7 @@ def detect(base64img):
 				cv2.imwrite('roi.jpg',roi)			
                 #translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang="OCRB", config=custom_config)
 				
+				
 				"""logger.error('-------------------')
 				logger.error('tessdata folder:')
 				logger.error(PROJECT_ROOT)
