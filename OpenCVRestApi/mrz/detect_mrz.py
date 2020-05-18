@@ -129,7 +129,7 @@ def detect(base64img):
 
 				#pytesseract.pytesseract.tesseract_cmd = './.apt/usr/share/tessdata'
 				custom_config = r'-c tessedit_cheroku run bashhar_whitelist=ABCDEFGHIJKLMÑNOPQRSTUVWXYZ1234567890< --psm 6'
-				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='ocrb', config=custom_config)
+				translate = pytesseract.image_to_string(image[y:y+h, x:x+w], lang='OCRB', config=custom_config)
 				
 				logger.error(translate)
 				
